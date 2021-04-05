@@ -2,6 +2,7 @@ const express = require("express");
 
 
 const getNews = require("./controllers/getNews");
+const getPrice = require("./controllers/getPrice");
 
 
 
@@ -10,10 +11,10 @@ const port = 3005;
 
 
 app.get("/", (req, res) => {
-    console.log(getNews())
+    getNews(2330)
     res.send("hhhqqqq")
 });
 
 app.listen(port, () => {
-    console.log("App is listening on 3005")
+    console.log(`App is listening on http://localhost:${port}`)
 });
