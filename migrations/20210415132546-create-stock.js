@@ -11,10 +11,28 @@ module.exports = {
       stockId: {
         type: Sequelize.STRING
       },
-      name: {
+      ceo: {
+        type: Sequelize.STRING
+      },
+      website: {
+        type: Sequelize.STRING
+      },
+      startTime: {
+        type: Sequelize.STRING
+      },
+      location: {
+        type: Sequelize.STRING
+      },
+      dividend: {
         type: Sequelize.STRING
       },
       industory: {
+        type: Sequelize.STRING
+      },
+      rp: {
+        type: Sequelize.STRING
+      },
+      equity: {
         type: Sequelize.STRING
       },
       createdAt: {

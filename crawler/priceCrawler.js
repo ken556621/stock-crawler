@@ -4,7 +4,7 @@ const dayjs = require("dayjs");
 
 const puppeteer = require("puppeteer");
 
-const getNews = async () => {
+const getPrice = async () => {
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
     await page.goto(targetURL);
@@ -26,4 +26,4 @@ const getNews = async () => {
     await browser.close();
 }
 
-module.exports = getNews;
+module.exports = getPrice;

@@ -14,8 +14,15 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Stock.init({
-    name: DataTypes.STRING,
-    industory: DataTypes.STRING
+    stockId: DataTypes.STRING,
+    ceo: DataTypes.STRING,
+    website: DataTypes.STRING,
+    startTime: DataTypes.STRING,
+    location: DataTypes.STRING,
+    dividend: DataTypes.STRING,
+    industory: DataTypes.STRING,
+    rp: DataTypes.STRING,
+    equity: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Stock',

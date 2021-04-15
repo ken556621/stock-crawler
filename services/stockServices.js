@@ -3,12 +3,40 @@ const StockDb = db.Stock;
 const NewsDb = db.News;
 
 const stockServices = {
-    setStocks: (req, res, callback) => {
+    setStocksInfo: (req, res, callback) => {
+        const {
+            stockId,
+            ceo,
+            website,
+            startTime,
+            location,
+            dividend,
+            industory,
+            rp,
+            equity
+        } = req;
+
         StockDb.create({
-            stockId: req.stockId,
-            name: "test",
-            industory: "test Industory"
+            stockId,
+            ceo,
+            website,
+            startTime,
+            location,
+            dividend,
+            industory,
+            rp,
+            equity
         })
+    },
+    getInfo: (req, res, callback) => {
+        return StockDb.findAll({
+            raw: true,
+            nest: true
+        })
+            .then(info => {
+                callback(info)
+            })
+            .catch(error => console.log(error))
     },
     setDailyNews: (req, res, callback) => {
         const {
