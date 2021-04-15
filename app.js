@@ -5,7 +5,7 @@ const port = 3005;
 
 const infoCrawler = require("./crawler/infoCrawler");
 const newsCrawler = require("./crawler/newsCrawler");
-const priceCrawler = require("./crawler/priceCrawler");
+const priceVolumeCrawler = require("./crawler/priceVolumeCrawler");
 
 
 require("./routes")(app);

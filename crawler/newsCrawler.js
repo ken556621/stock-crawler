@@ -10,10 +10,11 @@ const getNews = async (stockId) => {
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
 
+    const navigationPromise = page.waitForNavigation({ waitUntil: "domcontentloaded" });
+
     await page.goto(targetURL);
     await page.screenshot({ path: "stock.png" });
-
-    await page.waitForSelector("section")
+    await navigationPromise;
 
     let body = await page.content()
 

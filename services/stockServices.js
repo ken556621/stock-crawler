@@ -1,6 +1,7 @@
 const db = require("../models");
 const StockDb = db.Stock;
 const NewsDb = db.News;
+const PriceVolumeDb = db.PriceVolume
 
 const stockServices = {
     setStocksInfo: (req, res, callback) => {
@@ -55,6 +56,27 @@ const stockServices = {
     },
     getDailyNews: (req, res, callback) => {
         return NewsDb.findAll({
+            raw: true,
+            nest: true
+        })
+            .then(news => {
+                callback(news)
+            })
+            .catch(error => console.log(error))
+    },
+    setPriceVolume: (req, res, callback) => {
+        const {
+            stockId,
+
+        } = req;
+
+        PriceVolumeDb.create({
+            stockId,
+
+        })
+    },
+    getPriceVolume: (req, res, callback) => {
+        return PriceVolumeDb.findAll({
             raw: true,
             nest: true
         })
