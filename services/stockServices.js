@@ -1,7 +1,7 @@
 const db = require("../models");
 const StockDb = db.Stock;
 const NewsDb = db.News;
-const PriceVolumeDb = db.PriceVolume
+const PricevolumeDb = db.priceVolume;
 
 const stockServices = {
     setStocksInfo: (req, res, callback) => {
@@ -64,15 +64,33 @@ const stockServices = {
             })
             .catch(error => console.log(error))
     },
-    setPriceVolume: (req, res, callback) => {
+    setStockPriceVolume: (req, res, callback) => {
         const {
             stockId,
-
+            date,
+            openPrice,
+            top,
+            low,
+            closePrice,
+            spread,
+            percentage,
+            volume,
+            dealPrice,
+            pe
         } = req;
 
-        PriceVolumeDb.create({
+        PricevolumeDb.create({
             stockId,
-
+            date,
+            openPrice,
+            top,
+            low,
+            closePrice,
+            spread,
+            percentage,
+            volume,
+            dealPrice,
+            pe
         })
     },
     getPriceVolume: (req, res, callback) => {

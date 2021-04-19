@@ -20,6 +20,7 @@ const favariteStockIdList = [
 ];
 
 app.get("/crawler", (req, res) => {
+    priceVolumeCrawler("2454")
     res.send("Write in database!!!")
 })
 

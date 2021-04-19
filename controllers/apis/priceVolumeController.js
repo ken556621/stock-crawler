@@ -3,9 +3,9 @@ const stockServices = require('../../services/stockServices')
 
 const priceVolumeController = {
     getPriceVolume: (req, res) => {
-        stockServices.getPriceVolume(req, res, (data) => {
-            res.json(data)
-        })
+        // stockServices.getPriceVolume(req, res, (data) => {
+        //     res.json(data)
+        // })
     }
 }
 
