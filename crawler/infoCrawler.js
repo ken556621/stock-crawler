@@ -2,7 +2,7 @@ const cheerio = require("cheerio")
 
 const puppeteer = require("puppeteer");
 
-const stockService = require('../services/stockServices');
+const stockService = require("../services/stockServices");
 
 const getInfo = async (stockId) => {
     const targetURL = `https://tw.stock.yahoo.com/d/s/company_${stockId}.html`

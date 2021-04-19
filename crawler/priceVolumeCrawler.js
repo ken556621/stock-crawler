@@ -3,7 +3,7 @@ const chunk = require("lodash/chunk")
 
 const puppeteer = require("puppeteer");
 
-const stockService = require('../services/stockServices');
+const stockService = require("../services/stockServices");
 
 const getPriceVolume = async (stockId) => {
     const targetURL = `https://www.cnyes.com/twstock/ps_historyprice.aspx?code=${stockId}`

@@ -1,4 +1,5 @@
 const express = require("express");
+const bodyParser = require('body-parser')
 
 const app = express();
 const port = 3005;
@@ -7,8 +8,10 @@ const infoCrawler = require("./crawler/infoCrawler");
 const newsCrawler = require("./crawler/newsCrawler");
 const priceVolumeCrawler = require("./crawler/priceVolumeCrawler");
 
-
-require("./routes")(app);
+app.use(bodyParser.urlencoded({
+    extended: true
+}))
+app.use(bodyParser.json())
 
 const favariteStockIdList = [
     "2330",
@@ -20,10 +23,11 @@ const favariteStockIdList = [
 ];
 
 app.get("/crawler", (req, res) => {
-    priceVolumeCrawler("2454")
     res.send("Write in database!!!")
 })
 
 app.listen(port, () => {
     console.log(`App is listening on http://localhost:${port}`)
 });
+
+require("./routes")(app);

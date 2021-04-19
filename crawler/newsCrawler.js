@@ -3,7 +3,7 @@ const dayjs = require("dayjs");
 
 const puppeteer = require("puppeteer");
 
-const stockService = require('../services/stockServices');
+const stockService = require("../services/stockServices");
 
 const getNews = async (stockId) => {
     const targetURL = `https://www.google.com/finance/quote/${stockId}:TPE?hl=zh-tw`

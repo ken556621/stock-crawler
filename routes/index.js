@@ -1,5 +1,5 @@
-const apis = require('./apis.js');
+const apis = require("./apis.js");
 
 module.exports = (app) => {
-    app.use('/api', apis)
+    app.use("/api", apis)
 };
