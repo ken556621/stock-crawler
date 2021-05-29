@@ -8,8 +8,8 @@ const stockController = {
             res.json(data)
         })
     },
-    getVolumeRank: (req, res) => {
-        const result = volumnRankCrawler();
+    getVolumeRank: async (req, res) => {
+        const result = await volumnRankCrawler();
 
         res.send(result)
     }

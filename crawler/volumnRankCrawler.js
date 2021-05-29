@@ -35,12 +35,12 @@ const getVolumeRank = async () => {
 
     await $("div.table-body-wrapper > ul > li > div > div:nth-child(2) > span").each((i, newData) => {
         if ($(newData).hasClass("C($c-trend-up)")) {
-            price.push("+" + $(newData).text())
+            price.push("+," + $(newData).text())
             return
         }
 
         if ($(newData).hasClass("C($c-trend-down)")) {
-            price.push("-" + $(newData).text())
+            price.push("-," + $(newData).text())
             return
         }
 
@@ -49,12 +49,12 @@ const getVolumeRank = async () => {
 
     await $("div.table-body-wrapper > ul > li > div > div:nth-child(4) > span").each((i, newData) => {
         if ($(newData).hasClass("C($c-trend-up)")) {
-            percentageList.push("+" + $(newData).text())
+            percentageList.push("+," + $(newData).text())
             return
         }
 
         if ($(newData).hasClass("C($c-trend-down)")) {
-            percentageList.push("-" + $(newData).text())
+            percentageList.push("-," + $(newData).text())
             return
         }
 
@@ -64,6 +64,8 @@ const getVolumeRank = async () => {
     dataCleaning(stockIdList)
 
     const formatedTable = formatTable(stockNameList, stockIdList, price, percentageList);
+
+    return formatedTable;
 
     await browser.close();
 };
