@@ -40,7 +40,6 @@ const getNews = async (stockId) => {
     const formattedData = formatData(title, source, beforeTime, stockId);
 
     formattedData.forEach(item => {
-        console.log(item)
         stockService.setDailyNews(item);
     });
 

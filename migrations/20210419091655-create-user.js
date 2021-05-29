@@ -17,9 +17,6 @@ module.exports = {
       email: {
         type: Sequelize.STRING
       },
-      favariteList: {
-        type: Sequelize.ARRAY
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

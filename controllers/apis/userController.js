@@ -7,7 +7,6 @@ const stockController = {
         //     console.log(req, "Controller")
         //     res.json("data")
         // })
-        console.log(req.body, "Controller")
         res.json("data")
     }
 }

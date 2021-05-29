@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
     uid: DataTypes.STRING,
     name: DataTypes.STRING,
     email: DataTypes.STRING,
-    favariteList: DataTypes.ARRAY
+    // favariteList: DataTypes.ARRAY
   }, {
     sequelize,
     modelName: 'User',
