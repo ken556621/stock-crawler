@@ -12,6 +12,11 @@ const stockController = {
         const result = await volumnRankCrawler();
 
         res.send(result)
+    },
+    getIndustryVolume: async (req, res) => {
+        stockServices.getIndustryVolume(req, res, (data) => {
+            res.json(data)
+        })
     }
 }
 

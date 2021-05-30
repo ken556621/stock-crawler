@@ -1,7 +1,6 @@
 const express = require("express")
 const router = express.Router()
 
-const infoController = require("../controllers/apis/stockController");
 const newsController = require("../controllers/apis/newsController");
 const priceVolumeController = require("../controllers/apis/priceVolumeController");
 const userController = require("../controllers/apis/userController");
@@ -9,7 +8,7 @@ const stockController = require("../controllers/apis/stockController");
 
 
 // Info
-router.get("/stock/info", infoController.getInfo)
+router.get("/stock/info", stockController.getInfo)
 
 // News
 router.get("/stock/news", newsController.getNews)
@@ -22,6 +21,9 @@ router.post("/stock/favarite", userController.saveFavariteList)
 
 // Volume Rank
 router.get("/stock/volume-rank", stockController.getVolumeRank)
+
+// Industry Volume
+router.get("/stock/industry-volume", stockController.getIndustryVolume)
 
 
 module.exports = router

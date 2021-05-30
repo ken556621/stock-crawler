@@ -2,6 +2,7 @@ const db = require("../models");
 const StockDb = db.Stock;
 const NewsDb = db.News;
 const PricevolumeDb = db.priceVolume;
+const IndustryVolumnDb = db.IndustryVolumn;
 
 const stockServices = {
     setStocksInfo: (req, res, callback) => {
@@ -102,7 +103,34 @@ const stockServices = {
                 callback(news)
             })
             .catch(error => console.log(error))
-    }
+    },
+    setIndustryVolume: (req, res, callback) => {
+        const {
+            stockId,
+            name,
+            tradingVolume,
+            percentage,
+            dataSourceDate
+        } = req;
+
+        IndustryVolumnDb.create({
+            stockId,
+            name,
+            tradingVolume,
+            percentage,
+            dataSourceDate
+        })
+    },
+    getIndustryVolume: (req, res, callback) => {
+        return IndustryVolumnDb.findAll({
+            raw: true,
+            nest: true
+        })
+            .then(industry => {
+                callback(industry)
+            })
+            .catch(error => console.log(error))
+    },
 }
 
 module.exports = stockServices

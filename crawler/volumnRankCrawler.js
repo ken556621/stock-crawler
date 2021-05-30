@@ -11,7 +11,6 @@ const getVolumeRank = async () => {
     const navigationPromise = page.waitForNavigation({ waitUntil: "domcontentloaded" });
 
     await page.goto(targetURL);
-    await page.screenshot({ path: "stock.png" });
     await navigationPromise;
 
     //把網頁的body抓出來
@@ -25,49 +24,48 @@ const getVolumeRank = async () => {
     const price = [];
     const percentageList = [];
 
-    await $("div.Lh\\(20px\\)").each((i, newData) => {
-        stockNameList.push($(newData).text())
-    });
+    Promise.all([
+        await $("div.Lh\\(20px\\)").each((i, newData) => {
+            stockNameList.push($(newData).text())
+        }),
+        await $("div.D\\(f\\).Ai\\(c\\) > span").each((i, newData) => {
+            stockIdList.push($(newData).text())
+        }),
+        await $("div.table-body-wrapper > ul > li > div > div:nth-child(2) > span").each((i, newData) => {
+            if ($(newData).hasClass("C($c-trend-up)")) {
+                price.push("+," + $(newData).text())
+                return
+            }
 
-    await $("div.D\\(f\\).Ai\\(c\\) > span").each((i, newData) => {
-        stockIdList.push($(newData).text())
-    });
+            if ($(newData).hasClass("C($c-trend-down)")) {
+                price.push("-," + $(newData).text())
+                return
+            }
 
-    await $("div.table-body-wrapper > ul > li > div > div:nth-child(2) > span").each((i, newData) => {
-        if ($(newData).hasClass("C($c-trend-up)")) {
-            price.push("+," + $(newData).text())
-            return
-        }
+            price.push($(newData).text())
+        }),
+        await $("div.table-body-wrapper > ul > li > div > div:nth-child(4) > span").each((i, newData) => {
+            if ($(newData).hasClass("C($c-trend-up)")) {
+                percentageList.push("+," + $(newData).text())
+                return
+            }
 
-        if ($(newData).hasClass("C($c-trend-down)")) {
-            price.push("-," + $(newData).text())
-            return
-        }
+            if ($(newData).hasClass("C($c-trend-down)")) {
+                percentageList.push("-," + $(newData).text())
+                return
+            }
 
-        price.push($(newData).text())
-    });
+            percentageList.push($(newData).text())
+        })
+    ])
 
-    await $("div.table-body-wrapper > ul > li > div > div:nth-child(4) > span").each((i, newData) => {
-        if ($(newData).hasClass("C($c-trend-up)")) {
-            percentageList.push("+," + $(newData).text())
-            return
-        }
-
-        if ($(newData).hasClass("C($c-trend-down)")) {
-            percentageList.push("-," + $(newData).text())
-            return
-        }
-
-        percentageList.push($(newData).text())
-    });
-
-    dataCleaning(stockIdList)
+    dataCleaning(stockIdList);
 
     const formatedTable = formatTable(stockNameList, stockIdList, price, percentageList);
 
-    return formatedTable;
-
     await browser.close();
+
+    return formatedTable;
 };
 
 const dataCleaning = (data) => {
