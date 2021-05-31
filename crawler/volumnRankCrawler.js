@@ -1,23 +1,20 @@
 const cheerio = require("cheerio");
+const axios = require("axios");
 
-const puppeteer = require("puppeteer");
 
+const getBrowserHtml = async () => {
+    try {
+        const res = await axios.get("https://tw.stock.yahoo.com/rank/volume");
+        return res
+    } catch (error) {
+        console.error(error);
+    }
+};
 
 const getVolumeRank = async () => {
-    const targetURL = `https://tw.stock.yahoo.com/rank/volume`
-    const browser = await puppeteer.launch();
-    const page = await browser.newPage();
+    const targetPageHtml = await getBrowserHtml();
 
-    const navigationPromise = page.waitForNavigation({ waitUntil: "domcontentloaded" });
-
-    await page.goto(targetURL);
-    await navigationPromise;
-
-    //把網頁的body抓出來
-    let body = await page.content()
-
-    //接著我們把他丟給cheerio去處理
-    let $ = await cheerio.load(body);
+    let $ = await cheerio.load(targetPageHtml.data);
 
     const stockNameList = [];
     const stockIdList = [];
@@ -62,8 +59,6 @@ const getVolumeRank = async () => {
     dataCleaning(stockIdList);
 
     const formatedTable = formatTable(stockNameList, stockIdList, price, percentageList);
-
-    await browser.close();
 
     return formatedTable;
 };
