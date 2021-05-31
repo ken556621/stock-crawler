@@ -31,7 +31,9 @@ const stockController = {
         }
         const result = await companyInfoCrawler(req.body.stockId);
 
-        res.send(result)
+        res.send({
+            data: result
+        })
     }
 }
 
