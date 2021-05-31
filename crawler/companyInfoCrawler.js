@@ -24,11 +24,21 @@ const getCompanyInfo = async (postData) => {
 
     let $ = await cheerio.load(targetPageHtml.data);
 
-    const result = []
+    const industry = await $("table table:nth-child(1) > tbody > tr:nth-child(2) > td:nth-child(2)").text();
+    const startDate = await $("table table:nth-child(1) > tbody > tr:nth-child(3) > td:nth-child(2)").text();
+    const listedDate = await $("table table:nth-child(1) > tbody > tr:nth-child(4) > td:nth-child(2)").text();
+    const shareCapital = await $("table table:nth-child(1) > tbody > tr:nth-child(8) > td:nth-child(2)").text();
+    const revenueProportion = await $("table table:nth-child(1) > tbody > tr:nth-child(11) > td:nth-child(2)").text();
+    const factory = await $("table table:nth-child(1) > tbody > tr:nth-child(13) > td:nth-child(2)").text();
 
-    await $("body").each((i, newData) => {
-        result.push($(newData).text())
-    });
+    const result = {
+        industry,
+        startDate,
+        listedDate,
+        shareCapital,
+        revenueProportion,
+        factory
+    };
 
     return result
 };
