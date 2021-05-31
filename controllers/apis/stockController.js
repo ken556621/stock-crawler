@@ -21,7 +21,15 @@ const stockController = {
         })
     },
     getCompanyDetail: async (req, res) => {
-        const result = await companyInfoCrawler();
+        if (!req.body) {
+            res.status(500).send("Stock id is required.");
+            return
+        }
+        if (!req.body.stockId) {
+            res.status(500).send("Stock id is required.");
+            return
+        }
+        const result = await companyInfoCrawler(req.body.stockId);
 
         res.send(result)
     }

@@ -26,7 +26,7 @@ router.get("/stock/volume-rank", stockController.getVolumeRank)
 router.get("/stock/industry-volume", stockController.getIndustryVolume)
 
 // Company Detail
-router.get("/stock/company-detail", stockController.getCompanyDetail)
+router.post("/stock/company-detail", stockController.getCompanyDetail)
 
 
 module.exports = router

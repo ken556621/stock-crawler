@@ -2,9 +2,9 @@ const cheerio = require("cheerio");
 const axios = require("axios");
 const iconv = require("iconv-lite")
 
-const getBrowserHtml = async () => {
+const getBrowserHtml = async (stockId) => {
     try {
-        const res = await axios.get("https://tw.stock.yahoo.com/d/s/company_3481.html", {
+        const res = await axios.get(`https://tw.stock.yahoo.com/d/s/company_${stockId}.html`, {
             responseType: "arraybuffer",
             transformResponse: [data => {
                 return iconv.decode(Buffer.from(data), "big5")
@@ -16,8 +16,11 @@ const getBrowserHtml = async () => {
     }
 };
 
-const getCompanyInfo = async () => {
-    const targetPageHtml = await getBrowserHtml();
+const getCompanyInfo = async (postData) => {
+    const stockId = postData;
+    const targetPageHtml = await getBrowserHtml(stockId);
+
+    if (!targetPageHtml) return "Your stack id is not found!"
 
     let $ = await cheerio.load(targetPageHtml.data);
 
@@ -27,9 +30,7 @@ const getCompanyInfo = async () => {
         result.push($(newData).text())
     });
 
-    // console.log(axios)
-
-    console.log(result)
+    return result
 };
 
 module.exports = getCompanyInfo;
