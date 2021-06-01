@@ -13,7 +13,6 @@ const getNews = async (stockId) => {
     const navigationPromise = page.waitForNavigation({ waitUntil: "domcontentloaded" });
 
     await page.goto(targetURL);
-    await page.screenshot({ path: "stock.png" });
     await navigationPromise;
 
     let body = await page.content()

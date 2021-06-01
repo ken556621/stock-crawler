@@ -6,8 +6,6 @@ const cors = require("cors");
 const app = express();
 const port = 3005;
 
-const fetchIndustryVolumn = require("./cloudFunction/getIndustryVolumn");
-
 app.use(cors())
 app.use(bodyParser.urlencoded({
     extended: true
