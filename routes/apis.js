@@ -18,11 +18,17 @@ router.post("/stock/favarite", userController.saveFavariteList)
 
 
 
-// Volume Rank
+// Volume rank
 router.get("/stock/volume-rank", stockController.getVolumeRank)
 
-// Industry Volume
+// Industry volume
 router.get("/stock/industry-volume", stockController.getIndustryVolume)
+
+// Get industry list
+router.post("/stock/industry-list", stockController.getIndustryList)
+
+// Get all gross margin
+router.get("/stock/all-gross-margin", stockController.getAllGrossMargin)
 
 // Company Detail
 router.post("/stock/company-detail", stockController.getCompanyDetail)

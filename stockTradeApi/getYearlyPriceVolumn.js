@@ -18,7 +18,7 @@ const formatData = (data) => {
             month: item[1],
             highestPrice: item[2],
             lowestPrice: item[3],
-            dealStock: item[5]
+            dealStock: Number(item[5].split(",").join("")) / 1000
         }
     })
 };

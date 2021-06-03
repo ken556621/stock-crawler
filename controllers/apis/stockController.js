@@ -3,8 +3,10 @@ const stockServices = require("../../services/stockServices");
 
 const volumnRankCrawler = require("../../crawler/volumnRankCrawler");
 const companyInfoCrawler = require("../../crawler/companyInfoCrawler");
+const industryListCrawler = require("../../crawler/industrialStockCrawler");
 
 const fetchYearlyPriceVolumn = require("../../stockTradeApi/getYearlyPriceVolumn");
+const fetchAllGrossMargin = require("../../stockTradeApi/getAllGrossMargin");
 
 
 
@@ -16,6 +18,19 @@ const stockController = {
     },
     getVolumeRank: async (req, res) => {
         const result = await volumnRankCrawler();
+
+        res.send(result)
+    },
+    getIndustryList: async (req, res) => {
+        if (!req.body) {
+            res.status(500).send("Industry id is required.");
+            return
+        }
+        if (!req.body.industryId) {
+            res.status(500).send("Industry id is required.");
+            return
+        }
+        const result = await industryListCrawler(req.body.industryId);
 
         res.send(result)
     },
@@ -50,6 +65,13 @@ const stockController = {
         }
 
         const result = await fetchYearlyPriceVolumn(req.body.stockId);
+
+        res.send({
+            data: result
+        })
+    },
+    getAllGrossMargin: async (req, res) => {
+        const result = await fetchAllGrossMargin();
 
         res.send({
             data: result
