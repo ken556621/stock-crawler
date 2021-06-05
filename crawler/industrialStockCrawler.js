@@ -4,12 +4,8 @@ const iconv = require("iconv-lite");
 
 const getBrowserHtml = async (industrailId) => {
     try {
-        const res = await axios.get(`https://www.cnyes.com/twstock/index2real.aspx?stockType=T&groupId=01&stitle=%e6%b0%b4%e6%b3%a5`, {
-            responseType: "arraybuffer",
-            transformResponse: [data => {
-                return iconv.decode(Buffer.from(data), "big5")
-            }]
-        });
+        const res = await axios.get(`https://www.cnyes.com/twstock/index2real.aspx?stockType=T&groupId=01&stitle=%e6%b0%b4%e6%b3%a5`);
+
         return res
     } catch (error) {
         console.error(error);
@@ -20,21 +16,33 @@ const getIndustrailStock = async (postData) => {
     const industrailId = postData;
     const targetPageHtml = await getBrowserHtml(industrailId);
 
-    console.log(targetPageHtml)
-
     if (!targetPageHtml) return "Your industry id is not found!"
 
     let $ = await cheerio.load(targetPageHtml.data);
 
-    const name = await $("div.Lh\\(20px\\).Fw\\(600\\).Fz\\(16px\\).Ell").text();
-    const stockId = await $("div > div.D\\(f\\).Ai\\(c\\) > span").text();
+    const nameList = [];
+    const stockIdList = [];
 
-    const result = {
-        name,
-        stockId
-    };
+    await $("#form1 > div.mainboxs > div.mbx.screenBx > div > table > tbody > tr > td:nth-child(3) > a").each((i, newData) => {
+        nameList.push($(newData).text())
+    });
 
-    return result
+    await $("#form1 > div.mainboxs > div.mbx.screenBx > div > table > tbody > tr > td:nth-child(2) > a").each((i, newData) => {
+        stockIdList.push($(newData).text())
+    });
+
+    const formatedResult = formatResponse(nameList, stockIdList)
+
+    return formatedResult
+};
+
+const formatResponse = (nameList, stockIdList) => {
+    return nameList.map((item, index) => {
+        return {
+            stockName: item,
+            stockId: stockIdList[index]
+        }
+    })
 };
 
 module.exports = getIndustrailStock;
