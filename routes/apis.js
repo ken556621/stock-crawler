@@ -30,6 +30,9 @@ router.post("/stock/industry-list", stockController.getIndustryList)
 // Get all gross margin
 router.get("/stock/all-gross-margin", stockController.getAllGrossMargin)
 
+// Get all price earn ratio
+router.get("/stock/all-price-earn-ratio", stockController.getAllPriceEarnRatio)
+
 // Company Detail
 router.post("/stock/company-detail", stockController.getCompanyDetail)
 

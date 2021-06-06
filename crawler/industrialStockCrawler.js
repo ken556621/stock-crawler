@@ -1,10 +1,9 @@
 const cheerio = require("cheerio");
 const axios = require("axios");
-const iconv = require("iconv-lite");
 
-const getBrowserHtml = async (industrailId) => {
+const getBrowserHtml = async (industryId) => {
     try {
-        const res = await axios.get(`https://www.cnyes.com/twstock/index2real.aspx?stockType=T&groupId=01&stitle=%e6%b0%b4%e6%b3%a5`);
+        const res = await axios.get(`https://www.cnyes.com/twstock/index2real.aspx?stockType=T&groupId=${industryId}&stitle=%E6%B0%B4%E6%B3%A5`);
 
         return res
     } catch (error) {
@@ -13,8 +12,8 @@ const getBrowserHtml = async (industrailId) => {
 };
 
 const getIndustrailStock = async (postData) => {
-    const industrailId = postData;
-    const targetPageHtml = await getBrowserHtml(industrailId);
+    const industryId = postData;
+    const targetPageHtml = await getBrowserHtml(industryId);
 
     if (!targetPageHtml) return "Your industry id is not found!"
 

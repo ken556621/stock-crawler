@@ -7,6 +7,7 @@ const industryListCrawler = require("../../crawler/industrialStockCrawler");
 
 const fetchYearlyPriceVolumn = require("../../stockTradeApi/getYearlyPriceVolumn");
 const fetchAllGrossMargin = require("../../stockTradeApi/getAllGrossMargin");
+const fetchAllPriceEarnRatio = require("../../stockTradeApi/getAllPriceEarnRatio");
 
 
 
@@ -72,6 +73,13 @@ const stockController = {
     },
     getAllGrossMargin: async (req, res) => {
         const result = await fetchAllGrossMargin();
+
+        res.send({
+            data: result
+        })
+    },
+    getAllPriceEarnRatio: async (req, res) => {
+        const result = await fetchAllPriceEarnRatio();
 
         res.send({
             data: result
