@@ -16,9 +16,7 @@ const fetchIndustryVolumn = async () => {
 
     const formatedData = formatData(res.data.data);
 
-    formatedData.forEach(item => {
-        stockServices.setIndustryVolume(item)
-    })
+    return formatedData
 };
 
 const formatData = (data) => {

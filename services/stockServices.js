@@ -120,17 +120,7 @@ const stockServices = {
             percentage,
             dataSourceDate
         })
-    },
-    getIndustryVolume: (req, res, callback) => {
-        return IndustryVolumnDb.findAll({
-            raw: true,
-            nest: true
-        })
-            .then(industry => {
-                callback(industry)
-            })
-            .catch(error => console.log(error))
-    },
+    }
 }
 
 module.exports = stockServices
