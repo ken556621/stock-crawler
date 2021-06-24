@@ -4,7 +4,7 @@ const dayjs = require("dayjs");
 const thisYear = dayjs().year();
 
 
-const fetchYearlyPriceVolumn = async (stockId) => {
+const fetchMonthlyPriceVolumn = async (stockId) => {
     const res = await axios.get(`https://www.twse.com.tw/exchangeReport/FMSRFK?response=json&date=${thisYear}0101&stockNo=${stockId}&_=1622522133562`);
 
     const formatedData = formatData(res.data.data);
@@ -23,4 +23,4 @@ const formatData = (data) => {
     })
 };
 
-module.exports = fetchYearlyPriceVolumn;
+module.exports = fetchMonthlyPriceVolumn;
