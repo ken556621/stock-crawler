@@ -16,8 +16,9 @@ const formatData = (data) => {
     return data.map(item => {
         return {
             month: item[1],
-            highestPrice: item[2],
-            lowestPrice: item[3],
+            highestPrice: Number(item[2]),
+            lowestPrice: Number(item[3]),
+            averagePrice: Number(item[4]),
             dealStock: Number(item[5].split(",").join("")) / 1000
         }
     })

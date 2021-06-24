@@ -36,8 +36,14 @@ router.get("/stock/all-price-earn-ratio", stockController.getAllPriceEarnRatio)
 // Company Detail
 router.post("/stock/company-detail", stockController.getCompanyDetail)
 
-// Stock this year price and volumn
-router.post("/stock/price-volumn-year", stockController.getYearlyPriceAndVolumn)
+// Stock this year all month price and volumn
+router.post("/stock/price-volumn-year", stockController.getMonthlyPriceAndVolumn)
+
+// Stock serveral years price and volumn
+router.post("/stock/price-volumn-multi-year", stockController.getYearlyPriceAndVolumn)
+
+// Stock info, name, id, industry category
+router.get("/stock/info", stockController.getAllStocksInfo)
 
 
 module.exports = router

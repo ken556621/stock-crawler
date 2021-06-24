@@ -1,6 +1,6 @@
 const cheerio = require("cheerio");
 const axios = require("axios");
-const iconv = require("iconv-lite")
+const iconv = require("iconv-lite");
 
 const getBrowserHtml = async (stockId) => {
     try {
