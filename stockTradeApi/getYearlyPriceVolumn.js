@@ -10,6 +10,7 @@ const fetchYearlyPriceVolumn = async (stockId) => {
 };
 
 const formatData = (data) => {
+    if (!data) return []
     return data.map(item => {
         return {
             year: item[0],
