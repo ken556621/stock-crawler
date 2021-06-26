@@ -52,7 +52,7 @@ router.post("/stock/price-volumn-year", stockController.getMonthlyPriceAndVolumn
 router.post("/stock/price-volumn-multi-year", stockController.getYearlyPriceAndVolumn)
 
 // 個股新聞
-router.get("/stock/info", stockController.getAllStocksInfo)
+router.post("/stock/individual-news", stockController.getIndividualStockNews)
 
 
 module.exports = router

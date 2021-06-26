@@ -17,21 +17,36 @@ const getIndividualStockNews = async (stockId) => {
     let $ = await cheerio.load(body);
 
     const title = [];
+    const dataSource = [];
 
-    await $("body > center > table:nth-child(11) > tbody > tr > td:nth-child(1) > table:nth-child(4) > tbody > tr:nth-child(2) > td > table > tbody > tr:nth-child(2) > td > table > tbody > tr:nth-child(1) > td:nth-child(2) > a").each((i, newData) => {
+    await $("body > center > table:nth-child(11) > tbody > tr > td:nth-child(1) > table:nth-child(4) > tbody > tr:nth-child(2) > td > table > tbody td > table > tbody a").each((i, newData) => {
         title.push($(newData).text())
     });
 
-    console.log(title, "title")
+    const href = await page.evaluate(
+        () => Array.from(
+            document.querySelectorAll("body > center > table:nth-child(11) > tbody > tr > td:nth-child(1) > table:nth-child(4) > tbody > tr:nth-child(2) > td > table > tbody > tr:nth-child(2) > td > table > tbody a[href]"),
+            a => a.getAttribute("href")
+        )
+    );
+
+    await $("body > center > table:nth-child(11) > tbody > tr > td:nth-child(1) > table:nth-child(4) > tbody > tr:nth-child(2) > td > table > tbody > tr:nth-child(2) > td > table > tbody td > font").each((i, newData) => {
+        dataSource.push($(newData).text())
+    });
+
+    const formatedData = formatData(title, dataSource, href, stockId)
+
+    return formatedData
 };
 
-const formatData = (titleArr, sourceArr, timeArr, stockId) => {
+const formatData = (titleArr, dataSourceArr, hrefArr, stockId) => {
     return titleArr.map((item, index) => {
         return {
             stockId,
             title: item,
-            source: sourceArr[index],
-            beforeTime: timeArr[index]
+            source: dataSourceArr[index],
+            href: "https://tw.stock.yahoo.com" + hrefArr[index],
+            time: dataSourceArr[index].split(" ")[0].substring(1)
         }
     })
 };

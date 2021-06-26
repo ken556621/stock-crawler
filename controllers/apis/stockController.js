@@ -117,7 +117,16 @@ const stockController = {
         })
     },
     getIndividualStockNews: async (req, res) => {
-        const result = await individualStockNewsCrawler();
+        if (!req.body) {
+            res.status(500).send("Stock id is required.");
+            return
+        }
+        if (!req.body.stockId) {
+            res.status(500).send("Stock id is required.");
+            return
+        }
+
+        const result = await individualStockNewsCrawler(req.body.stockId);
 
         res.send({
             data: result
