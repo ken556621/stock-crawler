@@ -10,6 +10,7 @@ const individualStockNewsCrawler = require("../../crawler/individualStockNews");
 
 const fetchMonthlyPriceVolumn = require("../../stockTradeApi/getMonthlyPriceVolumn");
 const fetchYearlyPriceVolumn = require("../../stockTradeApi/getYearlyPriceVolumn");
+const fetchDailyPriceVolumn = require("../../stockTradeApi/getDailyPriceVolumn");
 
 const fetchAllGrossMargin = require("../../stockTradeApi/getAllGrossMargin");
 const fetchAllPriceEarnRatio = require("../../stockTradeApi/getAllPriceEarnRatio");
@@ -58,6 +59,22 @@ const stockController = {
             return
         }
         const result = await companyInfoCrawler(req.body.stockId);
+
+        res.send({
+            data: result
+        })
+    },
+    getDailyPriceAndVolumn: async (req, res) => {
+        if (!req.body) {
+            res.status(500).send("Stock id is required.");
+            return
+        }
+        if (!req.body.stockId) {
+            res.status(500).send("Stock id is required.");
+            return
+        }
+
+        const result = await fetchDailyPriceVolumn(req.body.stockId);
 
         res.send({
             data: result

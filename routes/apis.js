@@ -45,6 +45,9 @@ router.get("/stock/volume-rank", stockController.getVolumeRank)
 // 個別公司資訊
 router.post("/stock/company-detail", stockController.getCompanyDetail)
 
+// 個股每日成交量與成交價
+router.post("/stock/price-volumn-day", stockController.getDailyPriceAndVolumn)
+
 // 個股多月成交量與成交價
 router.post("/stock/price-volumn-year", stockController.getMonthlyPriceAndVolumn)
 
