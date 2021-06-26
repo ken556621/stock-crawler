@@ -2,8 +2,15 @@ const cheerio = require("cheerio");
 
 const puppeteer = require("puppeteer");
 
-const getIndividualStockNews = async (stockId) => {
-    const targetURL = `https://tw.stock.yahoo.com/q/h?s=${stockId}`
+
+
+
+const result = [];
+let currentPage = 1;
+
+const fetchAllPageStockNews = async (stockId, url) => {
+
+    const targetURL = url || `https://tw.stock.yahoo.com/q/h?s=${stockId}`;
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
 
@@ -15,6 +22,12 @@ const getIndividualStockNews = async (stockId) => {
     let body = await page.content()
 
     let $ = await cheerio.load(body);
+
+    const stoppingFlag = await $("body > center > table:nth-child(11) > tbody > tr > td:nth-child(1) > table:nth-child(4) > tbody > tr:nth-child(2) > td > table > tbody > tr:nth-child(2) > td > table > tbody > tr:nth-child(1) > td:nth-child(2) > a").text();
+
+    if (!stoppingFlag) {
+        return
+    }
 
     const title = [];
     const dataSource = [];
@@ -34,20 +47,27 @@ const getIndividualStockNews = async (stockId) => {
         dataSource.push($(newData).text())
     });
 
-    const formatedData = formatData(title, dataSource, href, stockId)
+    currentPage++;
 
-    return formatedData
+    formatData(title, dataSource, href, stockId);
+
+    await fetchAllPageStockNews(stockId, `https://tw.stock.yahoo.com/q/h?s=${stockId}&pg=${currentPage}`)
+};
+
+const getIndividualStockNews = async (stockId) => {
+    await fetchAllPageStockNews(stockId);
+    return result;
 };
 
 const formatData = (titleArr, dataSourceArr, hrefArr, stockId) => {
-    return titleArr.map((item, index) => {
-        return {
+    titleArr.forEach((item, index) => {
+        result.push({
             stockId,
             title: item,
             source: dataSourceArr[index],
             href: "https://tw.stock.yahoo.com" + hrefArr[index],
             time: dataSourceArr[index].split(" ")[0].substring(1)
-        }
+        })
     })
 };
 
