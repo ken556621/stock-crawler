@@ -66,7 +66,7 @@ const formatData = (titleArr, dataSourceArr, hrefArr, stockId) => {
             title: item,
             source: dataSourceArr[index],
             href: "https://tw.stock.yahoo.com" + hrefArr[index],
-            time: dataSourceArr[index].split(" ")[0].substring(1)
+            date: dataSourceArr[index].split(" ")[0].substring(1)
         })
     })
 };

@@ -51,7 +51,7 @@ const formatData = (titleArr, sourceArr, timeArr, stockId) => {
     return titleArr.map((item, index) => {
         return {
             stockId,
-            title: item,
+            time: item,
             source: sourceArr[index],
             beforeTime: timeArr[index]
         }

@@ -39,6 +39,9 @@ router.get("/stock/all-price-earn-ratio", stockController.getAllPriceEarnRatio)
 
 // 個別資訊
 
+// 個股名稱
+router.post("/stock/name", stockController.getStockName)
+
 // 個股成交量排行
 router.get("/stock/volume-rank", stockController.getVolumeRank)
 
