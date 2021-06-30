@@ -4,7 +4,6 @@ const stockServices = require("../../services/stockServices");
 const volumnRankCrawler = require("../../crawler/volumnRankCrawler");
 const companyInfoCrawler = require("../../crawler/companyInfoCrawler");
 const industryListCrawler = require("../../crawler/industrialStockCrawler");
-const stockInfoCrawler = require("../../crawler/stockInfoCrawler");
 const individualStockNewsCrawler = require("../../crawler/individualStockNews");
 
 
@@ -123,13 +122,6 @@ const stockController = {
         }
 
         const result = await fetchYearlyPriceVolumn(req.body.stockId);
-
-        res.send({
-            data: result
-        })
-    },
-    getAllStocksInfo: async (req, res) => {
-        const result = await stockInfoCrawler();
 
         res.send({
             data: result

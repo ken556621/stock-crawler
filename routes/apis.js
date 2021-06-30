@@ -21,9 +21,6 @@ router.post("/stock/favarite", userController.saveFavariteList)
 
 // 多個資訊
 
-// 所有股票名稱 代碼 產業資料
-router.get("/stock/info", stockController.getAllStocksInfo)
-
 // 所有類股成交量
 router.get("/stock/industry-volume", stockController.getIndustryVolume)
 
