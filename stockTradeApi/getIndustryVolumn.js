@@ -14,7 +14,7 @@ const getWeekDay = () => {
         return dayjs().weekday(0).format("YYYYMMDD")
     }
     else {
-        return dayjs().subtract(1, "day").format("YYYYMMDD")
+        return dayjs().format("YYYYMMDD")
     }
 };
 
