@@ -18,7 +18,7 @@ const formatData = (timeStamp, closePrice) => {
     return timeStamp.map((item, index) => {
         return {
             date: dayjs.unix(item).format("YYYY/MM/DD"),
-            closePrice: Math.round(closePrice[index]) || 0
+            closePrice: (Math.round(closePrice[index] * 100) / 100) || 0
         }
     })
 };

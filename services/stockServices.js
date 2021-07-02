@@ -94,16 +94,6 @@ const stockServices = {
             pe
         })
     },
-    getPriceVolume: (req, res, callback) => {
-        return PriceVolumeDb.findAll({
-            raw: true,
-            nest: true
-        })
-            .then(news => {
-                callback(news)
-            })
-            .catch(error => console.log(error))
-    },
     setIndustryVolume: (req, res, callback) => {
         const {
             stockId,

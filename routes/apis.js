@@ -4,6 +4,8 @@ const router = express.Router()
 const newsController = require("../controllers/apis/newsController");
 const userController = require("../controllers/apis/userController");
 const stockController = require("../controllers/apis/stockController");
+const economicController = require("../controllers/apis/economicController");
+
 
 
 
@@ -56,6 +58,12 @@ router.post("/stock/price-volumn-multi-year", stockController.getYearlyPriceAndV
 
 // 個股新聞
 router.post("/stock/individual-news", stockController.getIndividualStockNews)
+
+
+// 經濟指標
+
+// 台灣經濟指標
+router.get("/economic/tw-index", economicController.getTwIndex)
 
 
 module.exports = router
