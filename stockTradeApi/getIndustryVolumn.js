@@ -14,14 +14,14 @@ const getWeekDay = () => {
         return dayjs().weekday(0).format("YYYYMMDD")
     }
     else {
-        return dayjs().format("YYYYMMDD")
+        return dayjs().subtract(1, "day").format("YYYYMMDD")
     }
 };
 
 const weekday = getWeekDay();
 
 const fetchIndustryVolumn = async () => {
-    const res = await axios.get(`https://www.twse.com.tw/exchangeReport/BFIAMU?response=json&date=${testDate}`);
+    const res = await axios.get(`https://www.twse.com.tw/exchangeReport/BFIAMU?response=json&date=${weekday}`);
 
     if (res.data.stat.includes("沒有")) {
         return
