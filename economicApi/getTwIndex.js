@@ -13,12 +13,12 @@ const fetchTwIndex = async () => {
             return item
         })
 
-        // console.log(result)
+        return result
     }
 
-    cleanData(res.data)
+    const cleanedData = cleanData(res.data);
 
-    return res.data
+    return cleanedData
 };
 
 module.exports = fetchTwIndex;

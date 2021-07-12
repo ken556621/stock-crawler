@@ -15,6 +15,8 @@ const fetchDailyPriceVolumn = async (stockId, startDate, endDate) => {
 };
 
 const formatData = (timeStamp, closePrice) => {
+    if (!timeStamp) return
+
     return timeStamp.map((item, index) => {
         return {
             date: dayjs.unix(item).format("YYYY/MM/DD"),
