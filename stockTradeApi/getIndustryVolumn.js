@@ -21,7 +21,7 @@ const getWeekDay = () => {
 const weekday = getWeekDay();
 
 const fetchIndustryVolumn = async () => {
-    const res = await axios.get(`https://www.twse.com.tw/exchangeReport/BFIAMU?response=json&date=${weekday}`);
+    const res = await axios.get(`https://www.twse.com.tw/exchangeReport/BFIAMU?response=json&date=${testDate}`);
 
     if (res.data.stat.includes("沒有")) {
         return
